@@ -1,6 +1,5 @@
-
-# Use the official Nginx image
-FROM nginx:latest
-
-# Copy the index.html file to the Nginx HTML directory
-COPY index.html /usr/share/nginx/html/index.html
+FROM ubuntu:20.04
+RUN DEBIAN_FRONTEND=noninteractive apt update && apt install -y nginx
+RUN rm -rf /var/www/html/*
+COPY index.html /var/www/html/index.html
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
